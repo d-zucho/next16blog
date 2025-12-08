@@ -4,8 +4,10 @@ import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { authClient } from '@/lib/auth-client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
+import z from 'zod'
 
 
 
@@ -20,8 +22,12 @@ const SignUpPage = () => {
     }
   })
 
-  const onSubmit = () => {
-    console.log('submit')
+  const onSubmit = async (data : z.infer<typeof signUpSchema>) => {
+    await authClient.signUp.email({
+      email: data.email,
+      name: data.name,
+      password: data.password,
+    })
   }
   return (
     <Card>
