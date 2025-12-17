@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        hostname: 'proper-roadrunner-962.convex.cloud',
+        protocol: 'https',
+        port: '',
+      }
     ],
   },
 };

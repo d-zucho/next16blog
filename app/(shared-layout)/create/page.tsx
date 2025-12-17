@@ -21,6 +21,7 @@ const CreatePage = () => {
       defaultValues: {
         title: '',
         content: '',
+        image: undefined
       }
     })
 
@@ -80,6 +81,29 @@ const CreatePage = () => {
                 </Field>
               )}
             />
+
+            {/* IMAGE UPLOAD */}
+            <Controller 
+              name='image'
+              control={form.control}
+              render={({fieldState,field: {onChange}}) => (
+                <Field>
+                  <FieldLabel>Image</FieldLabel>
+                  <Input
+                    aria-invalid={fieldState.invalid}
+                    placeholder='Write your content here...'
+                    type='file'
+                    accept='image/*'
+                     onChange={(e) => onChange(e.target.files?.[0])} // Pass the file object
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]}/>
+                  )}
+                </Field>
+              )}
+            />
+
+
             <Button type='submit' disabled={isPending} className='hover:cursor-pointer'>
               {isPending ? (
                 <>
